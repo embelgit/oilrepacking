@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+ <!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" > 
+
+    <hibernate-mapping>
+    
+    <class name="com.Fertilizer.hibernate.PurchaseReturnBean" 
+    table="purchase_return" schema="oil"
+    >
+    
+    	<id name="pkPurchaseReturnId" type="java.lang.Long" column="pk_purchase_return_id">
+			<generator class="increment" />
+		</id>
+
+			<property
+		name="catName"
+		type="java.lang.String"
+		column="catName"
+		length="128"/>
+		
+	
+		<property
+		name="pk_goods_receive_id"
+		type="java.lang.Long"
+		column="fk_goods_receive_id"
+		length="20"/>
+		
+		
+<!-- 		<property
+		name="fkSeedBillId"
+		type="java.lang.Long"
+		column="fk_seed_bill_id"
+		length="20"/>
+		
+		<property
+		name="fkPesticideBillId"
+		type="java.lang.Long"
+		column="fk_pesti_bill_id"
+		length="20"/> -->
+		
+		<!-- <property
+		name="aadhar"
+		type="java.lang.Long"
+		column="aadhar"
+		length="20"/> -->
+		
+		<property 
+		name="bill_no"
+		type="java.lang.Long"
+		column="bill_number"
+		length="20"/>
+		
+		<property 
+		name="product_name" 
+		type="java.lang.String" 
+		column="product_name"
+		length="128" />
+		
+		<property 
+		name="company_Name" 
+		type="java.lang.String" 
+		column="company"
+		length="128" />
+		
+		
+		<property 
+		name="weight" 
+		type="java.lang.Double" 
+		column="weight"
+		length="20" />
+		
+		<property 
+		name="buy_price" 
+		type="java.lang.Double" 
+		column="buy_price"
+		length="20" />
+		
+		<property 
+		name="mrp" 
+		type="java.lang.Double" 
+		column="mrp"
+		length="20" />
+		
+		<property
+		name="dupQuantity1"
+		type="java.lang.Double"
+		column="availabe_quantity"
+		length="20"/>
+		
+		
+		<property
+		name="quantity1"
+		type="java.lang.Double"
+		column="return_quantity"
+		length="20"/>
+		
+
+		<property 
+		name="tax_percentage" 
+		type="java.lang.Double" 
+		column="tax_percenntage"
+		length="20" />
+
+
+		<property 
+		name="return_amount" 
+		type="java.lang.Double" 
+		column="return_amount"
+		length="20" />
+		
+		
+		<property 
+		name="supplier_name" 
+		type="java.lang.String" 
+		column="supplier_name"
+		length="20" />
+			
+				
+		<property 
+		name="purchaseDate" 
+		type="java.lang.String" 
+		column="purchase_date"
+		length="128" />
+		
+		
+		
+		
+ 
+			</class>
+    </hibernate-mapping>

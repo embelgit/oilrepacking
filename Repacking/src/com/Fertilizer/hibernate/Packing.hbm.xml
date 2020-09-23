@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" > 
+
+    <hibernate-mapping>
+    
+    <class name="com.Fertilizer.hibernate.PackingBean" 
+    table="Packing" schema="oil">
+    
+    	<id name="packing_Id" type="java.lang.Long" column="pk_pack_id">
+			<generator class="increment" />
+		</id>
+
+
+		<property 
+		name="proName" 
+		type="java.lang.String" 
+		column="product_Name"
+		 />
+		
+		<property 
+		name="fk_type_id" 
+		type="java.lang.Long" 
+		column="fk_type_id"
+		 />
+		 
+		 <property 
+		name="container" 
+		type="java.lang.String" 
+		column="container"/>
+		
+		 <property 
+		name="packingQuantity" 
+		type="java.lang.Long" 
+		column="Packing_Quantity"/>
+		
+		<property 
+		name="fkCatId" 
+		type="java.lang.Long" 
+		column="fk_Cat_Id"
+		 />
+		 
+		 <property 
+		name="fkSubCatId" 
+		type="java.lang.Long" 
+		column="fk_SubCat_Id"/>
+		
+		 <property 
+		name="fkShopId" 
+		type="java.lang.Long" 
+		column="fk_Shop_Id"/>
+		
+		</class>
+    </hibernate-mapping>

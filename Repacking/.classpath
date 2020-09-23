@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/activation.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/ant.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/ant-antlr.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/ant-apache-bcel.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/ant-apache-bsf.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/ant-apache-log4j.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/ant-apache-oro.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/ant-apache-regexp.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/ant-apache-resolver.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/ant-apache-xalan2.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/ant-commons-logging.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/ant-commons-net.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/ant-jai.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/ant-javamail.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/ant-jdepend.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/ant-jmf.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/ant-jsch.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/ant-junit.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/ant-junit4.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/ant-launcher.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/antlr-2.7.7.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/ant-netrexx.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/ant-swing.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/ant-testutil.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/apache-commons-lang.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/apache-velocity-velocity-1.5.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/asm.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/asm-attrs.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/axis-ant.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/c3p0-0.9.1.1.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/cglib-2.1.3.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/commons-collections-2.1.1.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/ehcache-1.1.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/gson-1.6.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/gson-2.2.2.jar.zip"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/hibernate2.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/hibernate3.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/hibernate-tools.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/hibernate-tools-2.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/itextpdf-5.3.4.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/itextpdf-5.4.2.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/javax.mail-1.4.4.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/javax.mail-api-1.4.6.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/javax.transaction.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/jcommon-1.0.23.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/jcommon-1.0-sources.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/jcommon-1.0-sources.jar.zip"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/jcommon-xml-1.0.23.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/jdom-1.1.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/jdom-2.0.0.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/mail.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/middlegen.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/msbase.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/mssqlserver.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/msutil.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/mysql-connector.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/mysql-connector-java-5.1.11-bin.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/org.apache.commons.collections.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/quartz-2.2.3.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/quartz-jobs-2.2.3.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/slf4j-api-1.5.6.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/slf4j-api-1.7.7.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/slf4j-jdk14-1.5.6.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/slf4j-log4j12-1.5.6.jar"/>
+	<classpathentry kind="lib" path="G:/New folder/lib/slf4j-log4j12-1.7.7.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

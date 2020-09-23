@@ -1,0 +1,206 @@
+
+<%@page import="com.Fertilizer.hibernate.MeasuringUnitsBean"%>
+<%@page import="com.Fertilizer.dao.MeasuringUnitsDao"%>
+<%@page import="com.Fertilizer.hibernate.CotainerGoodsReceiveBean" %>
+<%@page import="com.Fertilizer.hibernate.Packing_InfoBean"%>
+<%@page import="com.Fertilizer.dao.Packing_InfoDao"%>
+<%boolean isHome = false;
+%>
+<%@include file="commons/header.jsp"%>
+
+<head>
+<meta charset="utf-8">
+<!-- <script type="text/javascript">
+function checkForDuplipackingEntry(){
+	
+		$("#proName option:selected").each(function() {
+		   selectedVal = $(this).text();
+			});
+		var splitText = selectedVal.split(",");
+	
+		var Quantity = splitText[2];
+		
+		$("#capacity option:selected").each(function() {
+			   selectedVal = $(this).text();
+			});
+		
+		var splitText = selectedVal.split(",");
+		
+		var typeId = splitText[0];
+          			
+		var packingQnty=document.getElementById("packingQuantity").value;
+          			
+          			if(Number(packingQnty) > Number(Quantity)){
+          				alert("Stock Not Available");
+          				location.reload();
+          				return false;
+          			}
+          			
+          			
+          			}
+          			
+function checkQuantityEntry(){
+
+	var packingQnty=document.getElementById("packingQuantity").value;
+      			
+      			if(packingQnty == "" ){
+      				alert("Please Enter Quantity!!!!!!");
+      				location.reload();
+      				return false;
+      			}
+      			
+      			}
+
+</script> -->
+<script type="text/javascript" src="/Repacking/staticContent/js/packing.js"></script>
+</head>
+
+<body onload="getProductName();">
+<div class="row header_margin_top">
+	<div align="center">
+		<h2 class="form-name style_heading">Packing</h2>
+	</div>
+
+</div>
+<div class="row">
+	<div class="col-sm-offset-1 col-md-10">
+		<hr style="border-top-color: #c1b1b1;">
+	</div>
+</div>
+<div class="container col-sm-offset-2" 	style ="padding-right: 128px"  >
+	<form class="form-horizontal" method="post" action="" name="pk">
+		<fieldset>
+			<div class="row form-group">
+				<div class="col-md-6">
+					<%@include file="commons/clock.jsp"%>
+				</div>
+			</div>
+			
+			
+ 	       <div class="row form-group">
+              	<label class="col-md-2 control-label" for="productName">Product Name<sup>*</sup></label>  
+
+            			<div class="col-md-9">
+							<div class="input-group" >
+									<span class="input-group-addon">
+										<i class="	glyphicon glyphicon-hand-right"></i>
+									</span>
+            						<select class="form-control" id='proName'   name="proName" >
+									</select>
+            				</div>
+            			</div>
+        	  </div> 
+
+		 <div class="row form-group">
+		       	<label class="col-md-2 control-label" for="packing_Type"><%if(abc.equals("marathi")){%><%=PropertiesHelper.marathiProperties.getProperty("packingtype") %> <%}%> <%if(abc.equals("english")){%>Container Name<%}%><sup>*</sup></label>  
+           			 <div class="col-md-3">
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="	glyphicon glyphicon-hand-right"></i>
+							</span>
+							 <%
+							GoodsReceiveDao pid1 = new GoodsReceiveDao();
+           						List pack1 =pid1.getAllContainer();
+							%>
+							 
+							<input type="text" id="containerName" list="pack_drop2" class="form-control" placeholder="Container Name" onchange="getunit()">
+				      <datalist id="pack_drop2">
+							<%
+					           for(int i=0;i<pack1.size();i++){
+					        	   CotainerGoodsReceiveBean pib1 =(CotainerGoodsReceiveBean)pack1.get(i);
+							%>
+							<option data-value="<%=pib1.getPkContainerGoodsReceiveId() %>" value="<%=pib1.getContainerName()%>">
+							<%
+				      			}
+				    		%>
+						</datalist> 
+            			</div>
+           </div>
+              	   	<label class="col-md-2 control-label" for="packing_Type"><%if(abc.equals("marathi")){%><%=PropertiesHelper.marathiProperties.getProperty("packingtype") %> <%}%> <%if(abc.equals("english")){%>Unit<%}%><sup>*</sup></label>  
+           			 <div class="col-md-3">
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="	glyphicon glyphicon-hand-right"></i>
+							</span>
+						<%-- <%
+								MeasuringUnitsDao dao2 = new MeasuringUnitsDao();
+           						List shop =dao2.getAllUnits();
+							
+							%> --%>
+						<input readonly="readonly" type="text" id="unitName" placeholder="Unit Name" class="form-control"> 	
+				<!-- 			<input type="text" id="unitName" placeholder="Unit Name" " class="form-control" > -->
+				<%-- <datalist id="unit_drop1">
+							list="unit_drop1
+							<%
+					           for(int i=0;i<shop.size();i++){
+					        	   MeasuringUnitsBean bean =(MeasuringUnitsBean)shop.get(i);
+							%>
+							<option data-value="<%=bean.getPkUnitId()%>" value="<%=bean.getUnitName() %>" >
+							<%
+				      			}
+				    		%>
+						</datalist> --%>
+            			</div>
+           </div>
+              	
+          </div>
+          
+          <div class="row form-group">
+		 		 <label class="col-md-2 control-label" for="container"><%if(abc.equals("marathi")){%><%=PropertiesHelper.marathiProperties.getProperty("container") %> <%}%> <%if(abc.equals("english")){%>No. Packing/Quantity<%}%><sup>*</sup></label>  
+           			 <div class="col-md-3">
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="	glyphicon glyphicon-hand-right"></i>
+							</span>
+							
+						<input type="text" id="packingQuantity" placeholder="Quantity to pack" class="form-control" onchange="getCapacity()">
+				 	
+               		</div>
+              	</div>
+              	
+              		<label class="col-md-2 control-label" for="packing_Type"><%if(abc.equals("marathi")){%><%=PropertiesHelper.marathiProperties.getProperty("packingtype") %> <%}%> <%if(abc.equals("english")){%>Container's Capacity<%}%><sup>*</sup></label>  
+           			 <div class="col-md-3">
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="	glyphicon glyphicon-hand-right"></i>
+							</span>
+							
+							<select class="form-control" id='capacity'   name="capacity" onchange="getContainerByPacking();return false();checkQuantityEntry();checkForDuplipackingEntry();" >
+							<select class="form-control" id='capacity'   name="capacity" onchange="getContainerByPacking();return false()">
+									</select>
+            			</div>
+           </div>
+           </div>
+              	
+           <div class="row form-group">
+           <label class="col-md-2 control-label" for="container"><%if(abc.equals("marathi")){%><%=PropertiesHelper.marathiProperties.getProperty("container") %> <%}%> <%if(abc.equals("english")){%>No Of Container<%}%><sup>*</sup></label>  
+           			 <div class="col-md-3">
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="	glyphicon glyphicon-hand-right"></i>
+							</span>
+							
+						<input readonly="readonly" type="text" id="container" placeholder="No of container" class="form-control" onchange="checkQuantityEntry()">
+				 	
+               		</div>
+              	</div>
+          </div>
+           			
+				<div class="form-group row">
+					<div class="col-md-10 text-center">
+						<input type="button" id="save" name="btn" style="font-size: 25px; width: 130px; height: 60px; padding-top: 0px;"
+							class="btn btn-large btn-success glyphicon glyphicon-save  button-height-width"
+							onclick="packValidation()" value="Submit"> 
+							
+						<input id="save"name="btn" style="font-size: 25px;width: 130px;height: 60px; padding-top: 0px;"
+							class="btn btn-large btn-danger glyphicon glyphicon-remove-circle  button-height-width"
+							type="reset" onclick="reset()" value="Cancel">
+					</div>
+				</div>
+		
+		</fieldset>
+	</form>
+</div>
+</body>
+
+<%@include file="commons/newFooter.jsp"%>
