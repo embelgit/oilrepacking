@@ -6,6 +6,7 @@ public class BillBean {
 	private Long pk_goods_receive_id;
 	
 	private Long barcodeNo;
+	private int i=0;
 
 	public Long getPk_goods_receive_id() {
 		return pk_goods_receive_id;
