@@ -38,7 +38,7 @@ function checkForDuplipackingEntry(){
           			
           			
           			}
-          			
+          		
 function checkQuantityEntry(){
 
 	var packingQnty=document.getElementById("packingQuantity").value;
@@ -50,7 +50,6 @@ function checkQuantityEntry(){
       			}
       			
       			}
-
 </script> -->
 <script type="text/javascript" src="/Repacking/staticContent/js/packing.js"></script>
 </head>
@@ -188,11 +187,11 @@ function checkQuantityEntry(){
            			
 				<div class="form-group row">
 					<div class="col-md-10 text-center">
-						<input type="button" id="save" name="btn" style="font-size: 25px; width: 130px; height: 60px; padding-top: 0px;"
+						<input type="button" id="save" name="btn" style="font-size: 25px; width: 180px; height: 65px; padding-top: 0px;"
 							class="btn btn-large btn-success glyphicon glyphicon-save  button-height-width"
 							onclick="packValidation()" value="Submit"> 
 							
-						<input id="save"name="btn" style="font-size: 25px;width: 130px;height: 60px; padding-top: 0px;"
+						<input id="save"name="btn" style="font-size: 25px;width: 180px;height: 60px; padding-top: 0px;"
 							class="btn btn-large btn-danger glyphicon glyphicon-remove-circle  button-height-width"
 							type="reset" onclick="reset()" value="Cancel">
 					</div>

@@ -1,7 +1,13 @@
 function supplierDetail(){
-	 supDetails();
+	 //supDetails();
 if(document.spld.IdNo.value != "")
 {
+	
+	var letterNumber = /^[0-9]$/;
+	if(document.spld.IdNo.value.match(letterNumber))
+	{
+		
+	
 	if(document.spld.dealerName.value != "")
 	{
 		
@@ -89,10 +95,11 @@ if(document.spld.IdNo.value != "")
 	}
 	else
 	{
-		alert("Enter ID No");
+		alert("Enter SupplierId In Number Only ");
 		return false;
 	}
 			
+}
 }
 
 	/*else
@@ -246,7 +253,7 @@ if(document.spld.IdNo.value != "")
 
 function supDetails(){
 
-				document.getElementById("save").disabled = true;
+				document.getElementById("save").disabled = false;
 	
 				var dealerName = $('#dealerName').val();
 				var personName = $('#personName').val();
@@ -409,7 +416,7 @@ function updateSupplierDetails(){
 function updateSupplierDetails1(){
 
 	
-	document.spld1.btn.disabled = false;
+	document.spld1.btn.disabled = true;
 	
 	var input = document.getElementById('supplier'),
     list = document.getElementById('sup_drop'),
@@ -492,6 +499,4 @@ function updateSupplierDetails1(){
  	    			$(loaderObj).find('#errorDiv').show();
  	    		}
  	    	});
-
-
 }

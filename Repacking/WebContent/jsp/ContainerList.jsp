@@ -93,7 +93,7 @@
 					<th>Container Name</th>
 					<th>Capacity</th>
 	                <th>Unit</th>
-	              	<th>Extra Packing</th>
+	              
 					
 					
 				</tr>
@@ -109,7 +109,7 @@
 					<td class="align"><%=sr.getContainerName()%></td>
 					<td class="align"><%=sr.getPacking_Type()%></td>
 					<td class="align"><%=sr.getUnitName()%></td>
-					<td class="align"><%=sr.getExtraPacking()%></td>
+					
 					
 				</tr>
 	
@@ -122,7 +122,7 @@
 	
 	<div class="wrapper" align="center">
 		<input type="button" value="Back" id="listBtn" style="font-size: 25" class="btn btn-primary" onclick="Back()" /> 
-		 <input type="button" value="Delete Product" style="font-size: 25" id="listBtn2" class="btn btn-primary" onclick="deletProduct()" />
+		 <input type="button" value="Delete Container" style="font-size: 25" id="listBtn2" class="btn btn-primary" onclick="deletProduct()" />
 	</div>
 	
 </body>

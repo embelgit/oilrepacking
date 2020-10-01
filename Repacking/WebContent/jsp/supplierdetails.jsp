@@ -33,7 +33,9 @@ function checkForDuplicateProductEntry(){
 	/*  var splitText = selectedVal.split(",");  
 	
 	var supId = splitText[0];*/
-		
+				
+			
+			
 		if(document.getElementById("dealerName").value ==dealer && supId != dealer ){
 			alert("Supplier already exist...Duplicate Not allowed");
 			location.reload();

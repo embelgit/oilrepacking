@@ -1,21 +1,31 @@
 function customerDetails(){
-
-	if(document.cstd.IdNo.value == "")
+	
+	if(document.cstd.IdNo.value != "")
+		
 	{
-		alert("Enter Party Number");
-		return false;
-	}	
+
+		
+		
+	
+	
+	var letterNumber = /^[0-9]$/;
+	if(document.cstd.IdNo.value.match(letterNumber))
+	
+	{
+	
+	
+	
 	if(document.cstd.firstName.value == "")
 	{
 		alert("Enter Customer  Name.");
 		return false;
 	}	
-	var letterNumber = /^[a-zA-Z, ]+$/;
+	var letterNumber = /^[a-zA-Z]+$/;
 	if(document.cstd.firstName.value.match(letterNumber))
 	{
-		/*if(document.cstd.middleName.value == "")
+		if(document.cstd.middleName.value == "")
 		{
-			alert("Enter Customer First Name.");
+			alert("Enter Customer Middle  Name.");
 			return false;
 		}	
 		var letterNumber = /^[a-zA-Z, ]+$/;
@@ -28,7 +38,7 @@ function customerDetails(){
 			}	
 			var letterNumber = /^[a-zA-Z, ]+$/;
 			if(document.cstd.lastName.value.match(letterNumber))
-			{*/
+			{
 				          if(document.cstd.gstNo.value == "")
    				           {
    					          alert("Please Enter GST Number");
@@ -106,7 +116,7 @@ function customerDetails(){
 						}	
 					}
 																
-			/*else
+			else
 				{
 					alert("Enter Alphabets Only in Last Name Field..!!");
 					return false;
@@ -118,7 +128,7 @@ function customerDetails(){
 				alert("Enter Alphabets Only in Middle Name Field..!!");
 				return false;
 			}
-		}*/
+		}
 												
 	else
 		{
@@ -126,15 +136,24 @@ function customerDetails(){
 			return false;
 		}
 
-	}	
 	
-
+	}
+	else{
+		
+		alert("Enter Party Id In Number only...!! ")
+		
+		return false;
+		
+	}
+	}	
+	}
 
 
 function custDetails(){
 	
 				document.getElementById("save").disabled =false;
 				
+				//document.getElementById("save").disabled =true;
 				var firstName = $('#firstName').val();
 				var middleName = $('#middleName').val();
 				var lastName = $('#lastName').val();
@@ -327,8 +346,8 @@ function updateCustomerDetails(){
 function updateCustomerDetails1(){
 
 	
-	document.cstd1.btn.disabled = true;
-	
+	//document.cstd1.btn.disabled = true;
+	document.cstd1.btn.disabled = false;
 	var input = document.getElementById('creditCustomer'),
     list = document.getElementById('cust_drop'),
     	i,fkRootCustId;
@@ -376,7 +395,8 @@ function updateCustomerDetails1(){
 				{
 					document.cstd1.reset();
 				}	
-				document.cstd1.btn.disabled =false;
+				document.cstd1.btn.disabled =true;
+				//document.cstd1.btn.disabled =false;
 			}
  	    	).error(function(jqXHR, textStatus, errorThrown){
  	    		
@@ -392,4 +412,3 @@ function updateCustomerDetails1(){
 
 
 }
-
