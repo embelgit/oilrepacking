@@ -19,6 +19,8 @@ function checkForDuplicateProductEntry(){
 		for(z=0;z<list.size();z++){
 			SupplierDetailsBean bean = (SupplierDetailsBean)list.get(z);
 		%>
+		
+		
 		var supId = "<%=bean.getIdNo()%>";
 		var  dealer = "<%=bean.getDealerName()%>";
 		

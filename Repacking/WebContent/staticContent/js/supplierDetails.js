@@ -55,11 +55,15 @@ if(document.spld.IdNo.value != "")
       				 }
 	   	        	 }
 	   	        	 else {
-	   	        		 alert("please enter emailid in proper format ");
+	   	        		alret("please enter emailid in proper format")
 	   	        		 return false;
 	   	        		 }
 	   	        	 }
-	   	        	 
+      				else
+      					{
+      					
+      					alert("please Enter EmaiId ");
+      					}
       			 }
       			 else
       			 {
@@ -67,6 +71,7 @@ if(document.spld.IdNo.value != "")
  					 return false;
       			 }
 				}
+				
 				else
 				{
 					alert("Please Enter Contact Number");
@@ -76,7 +81,7 @@ if(document.spld.IdNo.value != "")
       			 }
       			 else
       			 {
-      				 alert("Enter person Name Contains only Characters");
+      				 alert("Enter Supplier Name Contains only Characters");
       				 return false;
       			 }
 		}
@@ -87,20 +92,40 @@ if(document.spld.IdNo.value != "")
 			}
 			
 		}
+	
 		else
 		{
 			alert("Enter Supplier Name");
 			return false;
 		}	
+	
+	
+	
+	
+	
+	
+	
 	}
+	else{
+		alert("Enter SupplierId In number only!");
+	}
+	
+	
+}
 	else
 	{
-		alert("Enter SupplierId In Number Only ");
+		alert("Enter SupplierId ...!!");
 		return false;
 	}
-			
+
+	
+	
+
 }
-}
+
+	
+	
+
 
 	/*else
 	{

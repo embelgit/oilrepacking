@@ -4,17 +4,11 @@ function customerDetails(){
 		
 	{
 
-		
-		
-	
-	
 	var letterNumber = /^[0-9]$/;
 	if(document.cstd.IdNo.value.match(letterNumber))
 	
 	{
-	
-	
-	
+		
 	if(document.cstd.firstName.value == "")
 	{
 		alert("Enter Customer  Name.");
@@ -82,7 +76,7 @@ function customerDetails(){
 
 						   	        		 custDetails();
 											
-											}
+						   	        	 }
 						   	        	 else
 											{
 												alert("Enter a Valid email address..!!");

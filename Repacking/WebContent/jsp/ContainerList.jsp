@@ -93,7 +93,7 @@
 					<th>Container Name</th>
 					<th>Capacity</th>
 	                <th>Unit</th>
-	              
+	              <%--	<th>Extra Packing</th> --%>
 					
 					
 				</tr>
@@ -109,7 +109,7 @@
 					<td class="align"><%=sr.getContainerName()%></td>
 					<td class="align"><%=sr.getPacking_Type()%></td>
 					<td class="align"><%=sr.getUnitName()%></td>
-					
+					<%-- <td class="align"><%=sr.getExtraPacking()%></td>--%>
 					
 				</tr>
 	
