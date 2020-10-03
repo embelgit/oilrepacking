@@ -17,11 +17,11 @@
 .master_form_img{background-image:url("http://localhost:8080/SMT/staticContent/y_images/21.jpg");}
 
 /* heading style */
-.style_heading{
+/*.style_heading{
 				color: #bdb7b7;
-			    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+			   /* text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;*/
 			    font-weight: bold;
-			  }	
+			  }*/	
 	 		   
 /*label style*/
 
@@ -53,8 +53,8 @@ input[type=reset]:hover {
 	 
 h2 {
     color: white;
-    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
-}	 
+    /*text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;*/
+}
 	
 	a:hover { 
     background-color: yellow;
