@@ -136,7 +136,7 @@
 			</div>
            
            <div class="row form-group">
-           	<label class="col-md-2 control-label" for="emailId"> Email ID</label>  
+           	<label class="col-md-2 control-label" for="emailId"> Email ID<sup>*</sup></label>  
            		<div class="col-md-3">
 					<div class="input-group">
 						<span class="input-group-addon">

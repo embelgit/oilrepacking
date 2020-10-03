@@ -5,7 +5,7 @@ function shopDetails(){
 		alert("Enter shop Name Name.");
 		return false;
 	}	
-	var letterNumber = /^[0-9a-zA-Z, ]+$/;
+	/*var letterNumber = /^[0-9a-zA-Z, ]+$/;
 	if(document.catd.shopName.value.match(letterNumber))
 	{
 		shopDetails1();
@@ -15,7 +15,12 @@ function shopDetails(){
 	{
 		alert("Enter Alnumerics Only in shop name field..!!");
 		return false;
-	}	
+	}*/
+	if(document.catd.shopName.value != "" || document.catd.shopName.value != null)
+		{
+			shopDetails1();
+		}
+	
 }
 
 function shopDetails1(){

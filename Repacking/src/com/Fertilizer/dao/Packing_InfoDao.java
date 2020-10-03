@@ -86,7 +86,8 @@ public void deletCont(String ContName) {
 		 hbu = HibernateUtility.getInstance();
 		 session = hbu.getHibernateSession();
 		 tx = session.beginTransaction();
-		 Query query = session.createSQLQuery("delete from packing_type where pk_type_id='"+ContName+"'");
+		 Query query = session.createSQLQuery("delete from packing_type where pk_type_id ='"+ContName+"'");
+		 //Query query = session.createSQLQuery("delete from container_stock_detail where container_name ="+ContName);
 			int seletedRecords = query.executeUpdate();
 			tx.commit();
 		System.out.println("tx commit");	

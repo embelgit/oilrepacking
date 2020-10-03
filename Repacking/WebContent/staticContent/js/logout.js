@@ -45,9 +45,19 @@ function login(){
 	params["uname"] = uname;
 	params["pass"] = pass;
 	
-	if(uname=="" && pass=="")
+	if(uname=="" || pass=="")
 		{
-		alert("Wrong username or password");
+		if(uname=="")
+			{
+			alert("enter a username");
+			return false;
+			}
+		else{
+			alert("enter a password");
+			return false;
+		}
+		alert("Enter a username and passord");
+		return false;
 		}
 	
 	params["methodName"] = "login";

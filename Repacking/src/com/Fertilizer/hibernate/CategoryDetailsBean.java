@@ -3,6 +3,7 @@ package com.Fertilizer.hibernate;
 public class CategoryDetailsBean {
 
 				private long catId;
+				private long tempvr;
 				private String categoryName;
 				/*private String subCategoryName;*/
 			
@@ -38,6 +39,12 @@ public class CategoryDetailsBean {
 					this.subCategoryName = subCategoryName;
 				}*/
 
+				public Long getTempvr() {
+					return tempvr;
+				}
+				public void setTempvr(Long tempvr) {
+					this.tempvr = tempvr;
+				}
 				public CategoryDetailsBean() {
 					super();
 					// TODO Auto-generated constructor stub

@@ -6,6 +6,7 @@ import java.math.BigInteger;
 public class GetCategoryDetails {
 	
 	private Long catId;
+	private long tempvr;
 	private String catType;
 	private String categoryName;
 	public String getCategoryName() {
@@ -28,5 +29,10 @@ public class GetCategoryDetails {
 	public void setCatType(String catType) {
 		this.catType = catType;
 	}
-
+	public Long getTempvr() {
+		return tempvr;
+	}
+	public void setTempvr(Long tempvr) {
+		this.tempvr = tempvr;
+	}
 }
