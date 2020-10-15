@@ -2,6 +2,7 @@ package com.Fertilizer.helper;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -19,7 +20,9 @@ import org.jfree.util.Log;
 import com.Fertilizer.hibernate.CotainerGoodsReceiveBean;
 import com.Fertilizer.bean.GetpackingDetails;
 import com.Fertilizer.dao.PackingDao;
+import com.Fertilizer.dao.Packing_InfoDao;
 import com.Fertilizer.hibernate.PackingBean;
+import com.Fertilizer.hibernate.Packing_InfoBean;
 import com.Fertilizer.hibernate.Stock;
 import com.Fertilizer.hibernate.containerStock;
 import com.Fertilizer.utility.HibernateUtility;
@@ -274,17 +277,49 @@ public class PackingHelper {
 		Map map = new HashMap();
 
 //		GoodsReceiveHibernate bean = new GoodsReceiveHibernate();
-		CotainerGoodsReceiveBean bean = new CotainerGoodsReceiveBean();
+		containerStock bean = new containerStock();
 		for (int i = 0; i < list.size(); i++) 
 		{
 			Object[] o = (Object[]) list.get(i);
 			System.out.println(" Result - "+Arrays.toString(o));
 			
-			bean.setPkContainerGoodsReceiveId(Long.parseLong(o[0].toString()));
+			bean.setPkContainerStockId(Long.parseLong(o[0].toString()));
 			bean.setUnit(o[1].toString());
-			System.out.println("~~~~~~~~~ ~~~~~~ ~~~~~ pk  ID -- "+bean.getPkContainerGoodsReceiveId()+" & unit  is - - "+bean.getUnit());
+			bean.setQuantity(Double.parseDouble(o[2].toString()));
+			System.out.println("~~~~~~~~~ ~~~~~~ ~~~~~ pk  ID -- "+bean.getPkContainerStockId()+" & unit  is - - "+bean.getUnit()+" & quantity  is - - "+bean.getQuantity());
 		}
-		map.put(bean.getPkContainerGoodsReceiveId(), bean);
+		map.put(bean.getPkContainerStockId(), bean);
 		return map;
 	}
+
+
+
+
+
+
+public Map getquantity(String id) {
+	
+	PackingDao dao = new PackingDao();
+	List list = dao.getquantity(id);
+	System.out.println(list.size());
+	Map  map1 =  new HashMap();
+	
+	  for(int i=0;i<list.size();i++)
+	 {
+		 Object[] o = (Object[])list.get(i);
+		 
+		 containerStock bean = new containerStock();
+		 bean.setPkContainerStockId(Long.parseLong(o[0].toString()));
+		 bean.setContainerName(o[1].toString());
+		 bean.setQuantity(Double.parseDouble(o[2].toString()));
+		map1.put(bean.getPkContainerStockId(),bean);
+		
+		
+		System.out.println("container quantity:-"+bean.getQuantity());
+	 }
+	
+	
+	return map1;
+	
+}
 }

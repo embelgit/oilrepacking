@@ -251,7 +251,7 @@ public class CategoryDetailsDao {
 			for (Object[] o : list) {	
 				GetCategoryDetails p = new GetCategoryDetails();
 				p.setCatId(Long.parseLong(o[0].toString()));
-				p.setTempvr(Long.parseLong(o[0].toString()));
+				//p.setTempvr(Long.parseLong(o[0].toString()));
 				//p.setCatType(o[0].toString());
 				p.setCategoryName(o[1].toString());
 				System.out.println(p.getCategoryName());

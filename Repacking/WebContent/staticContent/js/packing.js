@@ -1,3 +1,47 @@
+
+
+
+
+function quantity(){
+	
+	document.pk.btn.disabled =true;
+	
+		var input = document.getElementById('containerName'),
+    list = document.getElementById('pack_drop2'),
+    i,container_id;
+	for (i = 0; i < list.options.length; ++i) {
+    if (list.options[i].value === input.value) {
+    	container_id = list.options[i].getAttribute('data-value');
+    }
+}	
+	var params= {};
+
+	params["id"]= container_id;
+	params["methodName"] = "getquantity";	
+	$.post('/Repacking/jsp/utility/controller.jsp',params,function(data)
+			{
+		var jsonData = $.parseJSON(data);
+	
+		$.each(jsonData,function(i,v)
+				{
+					
+			
+			document.getElementById("stock").value = v.quantity
+			getContainerByPacking();			
+		
+						
+					}).error(function(jqXHR, textStatus, errorThrown){
+						if(textStatus==="timeout") {
+
+						}
+					});
+		//	}
+				})
+		 
+}
+
+
+
 /*function packValidation()
 {
 	
@@ -45,10 +89,9 @@
 	
 }*/
 
-
 function packValidation()
 {
-	
+	document.pk.btn.disabled =true;
 	if(document.pk.proName.value == "")
 	{
 		
@@ -84,8 +127,9 @@ function packValidation()
 				 				
 				 				
 				 		}	
-				 				
+				 		//checkQuantityEntry();	
 				 			pack();
+				 			
        				 } 
 				 	
 				 	else{
@@ -98,7 +142,7 @@ function packValidation()
 
 function pack(){
 	
-	document.pk.btn.disabled =true;
+	//document.pk.btn.disabled =true;
 	var i=0;
 	var fk_packType_id=0;
 			var packingQuantity = $('#packingQuantity').val();
@@ -156,7 +200,7 @@ function pack(){
 	 				{
 	 					document.pk.reset();
 	 				}	
-	 				document.pk.btn.disabled =false;
+	 				//document.pk.btn.disabled =false;
 	 			}
 	 	    	).error(function(jqXHR, textStatus, errorThrown){
 	 	    		if(textStatus==="timeout") {
@@ -304,11 +348,19 @@ function getContainerByPacking(){
 			document.getElementById("containerName").value = "";
 			return false;
 		}
-	 else {
-	var quantityDividePacking = Number(packingQuantity)/Number(capacity)
-	
-	document.getElementById("container").value = quantityDividePacking;
+	 else{
+	var quantityDividePacking = Number(packingQuantity)/Number(capacity);
+	var stock = document.getElementById("stock").value ;
+	if(+stock >= +quantityDividePacking){
+	document.getElementById("container").value=quantityDividePacking  ;
+	}
+	else{
+		alert("Container Quantity is not available OR avialable Container Quantity is :-"+stock);
+		location.reload();
+		return false;
+	}
 	 }
+	 
 	}
 	
 	

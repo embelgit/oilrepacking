@@ -200,7 +200,15 @@ public class Controller {
 			System.out.println(xyz);
 			return xyz;
 		}
-		
+		//get quantity for packing
+		public String getquantity(HttpServletRequest request, HttpServletResponse response) {
+			String id = request.getParameter("id");
+			PackingHelper ph = new PackingHelper();
+			Map map = ph.getquantity(id);
+			String xyz = toJson(map);
+			System.out.println(xyz);
+			return xyz;
+		}
 		
 		
 		// Register Packing details
@@ -617,6 +625,27 @@ public class Controller {
 			return xyz;
 		}
 
+		
+		
+		
+	/*	public String checkQuantity1(
+				HttpServletRequest request, HttpServletResponse response) {
+			String id = request.getParameter("id");
+			PackingHelper helper = new PackingHelper();
+			Map items = helper.checkQuantity1(id);
+			String xyz = toJson(items);
+			System.out.println(xyz);
+			return xyz;
+		}
+		*/
+		
+
+		
+		
+		
+		
+		
+		
 	// To fetch project details as per product id
 	public String getProductDetailsforbill(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -1730,6 +1759,11 @@ public class Controller {
 			System.out.println("In controller == =  =" + xyz);
 			return xyz;
 		}
+		
+	 	
+		
+		
+		
 
 	// Get all purchase by bill no on purchase return form
 				public String getAllFertiIetmByBillNo(HttpServletRequest request,
@@ -2311,6 +2345,12 @@ public class Controller {
 				System.out.println("$$$$$$$$$$$$$$$$" + returnMap);
 				return toJson(returnMap);
 			}
-
+			
+			
+			
+			
+			
+			
+			
 		
 }

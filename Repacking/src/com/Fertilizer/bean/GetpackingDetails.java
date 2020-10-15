@@ -12,6 +12,7 @@ public class GetpackingDetails {
 	
 	private String catname;
 	private String subcatname;
+	private double quantity;
 	
 	public Double getWeight() {
 		return weight;
@@ -66,6 +67,12 @@ public class GetpackingDetails {
 	}
 	public void setSubcatname(String subcatname) {
 		this.subcatname = subcatname;
+	}
+	public double getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(double quantity) {
+		this.quantity = quantity;
 	}
 	
 }

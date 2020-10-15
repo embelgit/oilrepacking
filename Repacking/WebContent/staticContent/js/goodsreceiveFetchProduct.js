@@ -2360,10 +2360,12 @@ productId = $('#subCat').val();
 				
 				 var rowId = ids[j];
 				 var rowData = jQuery('#jqGrid').jqGrid ('getRowData', rowId);
-				
+				// if (prodName == jsonData[i].productName &&  packing == jsonData[i].weight)
 				if (prodName == jsonData[i].productName && com == jsonData[i].manufacturer && packing == jsonData[i].weight) {
 			    	
-			    	newrow=false;
+			    //	{
+					 
+					 newrow=false;
 					alert("Product Name Already Inserted !!!");
 					var grid = jQuery("#jqGrid");
 				    grid.trigger("reloadGrid");

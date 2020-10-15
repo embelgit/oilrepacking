@@ -1,4 +1,6 @@
 
+<%@page import="com.Fertilizer.hibernate.containerStock"%>
+<%@page import="com.Fertilizer.dao.PackingDao"%>
 <%@page import="com.Fertilizer.hibernate.MeasuringUnitsBean"%>
 <%@page import="com.Fertilizer.dao.MeasuringUnitsDao"%>
 <%@page import="com.Fertilizer.hibernate.CotainerGoodsReceiveBean" %>
@@ -10,47 +12,66 @@
 
 <head>
 <meta charset="utf-8">
-<!-- <script type="text/javascript">
-function checkForDuplipackingEntry(){
-	
-		$("#proName option:selected").each(function() {
-		   selectedVal = $(this).text();
-			});
-		var splitText = selectedVal.split(",");
-	
-		var Quantity = splitText[2];
-		
-		$("#capacity option:selected").each(function() {
-			   selectedVal = $(this).text();
-			});
-		
-		var splitText = selectedVal.split(",");
-		
-		var typeId = splitText[0];
+
+<%-- 
+<script type="text/javascript">
+function checkQuantityEntry(){
+          		
+	document.pk.btn.disabled =true;
+	<%
+          			PackingDao dao = new PackingDao();
+          			List list = dao.checkQuantity();
+          			%>
           			
-		var packingQnty=document.getElementById("packingQuantity").value;
+          			<%
           			
-          			if(Number(packingQnty) > Number(Quantity)){
-          				alert("Stock Not Available");
+          			for(int z=0;z<list.size();z++){
+          				containerStock bean1 = (containerStock)list.get(z);
+          				
+          			%>
+          			var db_id="<%=bean1.getPkContainerStockId() %>";
+          			var db_container_name="<%=bean1.getContainerName() %>";
+          			var db_quantity="<%=bean1.getQuantity() %>";
+          			
+          			
+          			
+          			
+          		//var quantity =	document.getElementById("quantity").value;
+          		var	ui_container = document.getElementById("container").value;
+          		var ui_container_name1=document.getElementById("containerName").value;
+          		
+          	//	var container=$('container').val;
+          		
+          			if(db_container_name==ui_container_name1 ){
+          				
+          			
+          			if(db_quantity < ui_container)
+          			{
+          				packValidation();
+          				
+          			
+          			}
+          			else{
+          				
+          				alert("container quantity is not available");
           				location.reload();
           				return false;
+          				
           			}
+          			
+          			}
+          			
+          			<%
+          			}
+          			%>
+          			
+          			
+      				
           			
           			
           			}
-          		
-function checkQuantityEntry(){
 
-	var packingQnty=document.getElementById("packingQuantity").value;
-      			
-      			if(packingQnty == "" ){
-      				alert("Please Enter Quantity!!!!!!");
-      				location.reload();
-      				return false;
-      			}
-      			
-      			}
-</script> -->
+</script>--%>
 <script type="text/javascript" src="/Repacking/staticContent/js/packing.js"></script>
 </head>
 
@@ -98,7 +119,7 @@ function checkQuantityEntry(){
 								<i class="	glyphicon glyphicon-hand-right"></i>
 							</span>
 							 <%
-							GoodsReceiveDao pid1 = new GoodsReceiveDao();
+							PackingDao pid1 = new PackingDao();
            						List pack1 =pid1.getAllContainer();
 							%>
 							 
@@ -106,9 +127,9 @@ function checkQuantityEntry(){
 				      <datalist id="pack_drop2">
 							<%
 					           for(int i=0;i<pack1.size();i++){
-					        	   CotainerGoodsReceiveBean pib1 =(CotainerGoodsReceiveBean)pack1.get(i);
+					        	   containerStock pib1 =(containerStock)pack1.get(i);
 							%>
-							<option data-value="<%=pib1.getPkContainerGoodsReceiveId() %>" value="<%=pib1.getContainerName()%>">
+							<option data-value="<%=pib1.getPkContainerStockId() %>" value="<%=pib1.getContainerName()%>">
 							<%
 				      			}
 				    		%>
@@ -164,8 +185,8 @@ function checkQuantityEntry(){
 								<i class="	glyphicon glyphicon-hand-right"></i>
 							</span>
 							
-							<select class="form-control" id='capacity'   name="capacity" onchange="getContainerByPacking();return false();checkQuantityEntry();checkForDuplipackingEntry();" >
-							<select class="form-control" id='capacity'   name="capacity" onchange="getContainerByPacking();return false()">
+				<%--			<select class="form-control" id='capacity'   name="capacity" onchange="getContainerByPacking();return false();checkQuantityEntry();checkForDuplipackingEntry();" >--%>
+							<select class="form-control" id='capacity'   name="capacity" onchange="quantity();return false()">
 									</select>
             			</div>
            </div>
@@ -179,7 +200,21 @@ function checkQuantityEntry(){
 								<i class="	glyphicon glyphicon-hand-right"></i>
 							</span>
 							
-						<input readonly="readonly" type="text" id="container" placeholder="No of container" class="form-control" onchange="checkQuantityEntry()">
+						<input readonly="readonly" type="text" id="container" placeholder="No of container" class="form-control" <%--onchange="checkQuantityEntry()"--%>>
+				 	
+               		</div>
+              	</div>
+          </div>
+        
+           <div class="row form-group" style="display: none;">
+           <label class="col-md-2 control-label" for="container"><%if(abc.equals("marathi")){%><%=PropertiesHelper.marathiProperties.getProperty("Stock") %> <%}%> <%if(abc.equals("english")){%>Container Quantity<%}%><sup>*</sup></label>  
+           			 <div class="col-md-3">
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="	glyphicon glyphicon-hand-right"></i>
+							</span>
+							
+						<input readonly="readonly" type="text" id="stock" placeholder="No of container" class="form-control" >
 				 	
                		</div>
               	</div>
@@ -196,6 +231,7 @@ function checkQuantityEntry(){
 							type="reset" onclick="reset()" value="Cancel">
 					</div>
 				</div>
+		
 		
 		</fieldset>
 	</form>

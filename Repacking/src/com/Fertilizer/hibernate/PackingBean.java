@@ -13,6 +13,8 @@ public class PackingBean {
 	private long packingQuantity;
 	private String container;
 	private String unitName;
+	private double quantity;
+	
 	
 	
 	
@@ -47,6 +49,24 @@ public class PackingBean {
 
 
 	
+
+
+	public PackingBean(long packing_Id, long proId, String proName, long fkCatId, long fkSubCatId, Double weight,
+			long fkShopId, long fk_type_id, long packingQuantity, String container, String unitName, double quantity) {
+		super();
+		this.packing_Id = packing_Id;
+		this.proId = proId;
+		this.proName = proName;
+		this.fkCatId = fkCatId;
+		this.fkSubCatId = fkSubCatId;
+		Weight = weight;
+		this.fkShopId = fkShopId;
+		this.fk_type_id = fk_type_id;
+		this.packingQuantity = packingQuantity;
+		this.container = container;
+		this.unitName = unitName;
+		this.quantity = quantity;
+	}
 
 
 	public PackingBean(long packing_Id, long proId, String proName,
@@ -155,6 +175,16 @@ public class PackingBean {
 
 	public void setUnitName(String unitName) {
 		this.unitName = unitName;
+	}
+
+
+	public double getQuantity() {
+		return quantity;
+	}
+
+
+	public void setQuantity(double quantity) {
+		this.quantity = quantity;
 	}
 	
 	

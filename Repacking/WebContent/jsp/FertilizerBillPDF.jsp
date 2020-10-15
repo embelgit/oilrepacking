@@ -98,7 +98,7 @@
 		document.open();
 
 		Class.forName("com.mysql.jdbc.Driver");
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/oil", "root", "root");
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/oil", "root", "system");
 		Statement stmt = conn.createStatement();
 
 		//ResultSet rs = stmt.executeQuery("select product_name,village,sale_price,total_amount from fertilizer_bill WHERE customerBill=" + billno);
