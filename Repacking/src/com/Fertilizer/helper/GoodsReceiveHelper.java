@@ -1026,9 +1026,10 @@ public class GoodsReceiveHelper {
 						Double quantity = (double)(Double.parseDouble(dupQuantity1) -  Double.parseDouble(quantity1));
 						System.out.println("after minus qunt : "+ quantity);
 	       		        GoodsReceiveBean updateStock = (GoodsReceiveBean) session.get(GoodsReceiveBean.class, new Long(pk_goods_receive_id));
-	       		       // updateStock.setQuantity(quantity);
-	       		        updateStock.setDupQuantity(quantity);
-	       		        //session.saveOrUpdate(updateStock);
+	       		       updateStock.setQuantity(quantity);
+	       		        //updateStock.setDupQuantity(quantity);
+	       		   // updateStock.setDupQuantity1(quantity);
+	       		        session.saveOrUpdate(updateStock);
 	       		        
 		       		    Query query2 = session.createSQLQuery("SELECT gross_total,bill_number FROM goods_receive WHERE pk_goods_receive_id="+pk_goods_receive_id);
 		 		        list2 = query2.list();
@@ -1307,11 +1308,12 @@ public class GoodsReceiveHelper {
 			try {
 				Long PkStockId;
 				Double quantity;
+				Double unpcked;
 				hbu1 = HibernateUtility.getInstance();
 				session1 = hbu1.getHibernateSession();
 				transaction1 = session1.beginTransaction();
-
-				Query query = session1.createSQLQuery("select PkStockId , Quantity from stock_detail where ProductName=:product_name AND CompanyName=:company_Name");
+				//Query query = session1.createSQLQuery("select PkStockId , Quantity from stock_detail where ProductName=:product_name AND CompanyName=:company_Name");
+				Query query = session1.createSQLQuery("select PkStockId , Quantity,unpacked_Quantity from stock_detail where ProductName=:product_name AND CompanyName=:company_Name");
 				query.setParameter("product_name", product_name);
 				query.setParameter("company_Name", company_Name);
 
@@ -1321,6 +1323,7 @@ public class GoodsReceiveHelper {
 					System.out.println("result from stock while purchase return - "+Arrays.toString(object));
 					PkStockId = Long.parseLong(object[0].toString());
 					quantity = Double.parseDouble(object[1].toString());
+					unpcked=Double.parseDouble(object[2].toString());
 					System.out.println("PkStockId --  " + PkStockId);
 					System.out.println("quantity got frm stock --- " + quantity);
 
@@ -1328,9 +1331,11 @@ public class GoodsReceiveHelper {
 					System.out.println("updatequnty to stock --  " + updatequnty);
 
 					Stock Stock = (Stock) session1.load(Stock.class, new Long(PkStockId));
-
+					if(unpcked>updatequnty)
+					{
+						Stock.setUnpackedQuantity(updatequnty);
+					}
 					Stock.setQuantity(updatequnty);
-
 					session1.saveOrUpdate(Stock);
 					transaction1.commit();
 					System.out.println("Success ");

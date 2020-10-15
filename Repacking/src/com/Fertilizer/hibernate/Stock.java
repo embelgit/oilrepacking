@@ -4,8 +4,6 @@ import java.util.Date;
 
 
 public class Stock {
-
-	
 	public long PkStockId;
 	public long catID;
 	public long subCatId;
@@ -20,7 +18,7 @@ public class Stock {
 	private String catname;
 	private String subcatname;
 	private Long billNo;
-	
+	private double packedQuantity;
 
 	public Stock() {
 		super();
@@ -37,7 +35,7 @@ public class Stock {
 
 	public Stock(long pkStockId, long catID, long subCatId, long fk_shop_id,
 			String productName, String companyName, double weight,
-			double quantity, double unpackedQuantity, Date updateDate, String subcatname, String catname, Long billNo) {
+			double quantity, double unpackedQuantity, Date updateDate, String subcatname, String catname, Long billNo,double packedQuantity) {
 		super();
 		PkStockId = pkStockId;
 		this.catID = catID;
@@ -52,6 +50,7 @@ public class Stock {
 		this.catname = catname;
 		this.subcatname = subcatname;
 		this.billNo = billNo;
+		this.packedQuantity =packedQuantity;
 	}
 
 	/*public String getBatchNum() {
@@ -178,8 +177,13 @@ public class Stock {
 		this.unpackedQuantity = unpackedQuantity;
 	}
 
+	public double getPackedQuantity() {
+		return packedQuantity;
+	}
 
-
+	public void setPackedQuantity(double packedQuantity) {
+		this.packedQuantity = packedQuantity;
+	}
 
 
 
@@ -202,31 +206,12 @@ public class Stock {
 		this.catname = catname;
 	}
 
-
-
-
-
-
-
-
-
 	public String getSubcatname() {
 		return subcatname;
 	}
 
-
-
-
-
-
-
-
-
 	public void setSubcatname(String subcatname) {
 		this.subcatname = subcatname;
 	}
-	
-	
-	
-	
+
 }

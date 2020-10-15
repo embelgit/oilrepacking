@@ -88,6 +88,13 @@
        
         /> 
         
+         <property
+        name="packedQuantity"
+        type="java.lang.Double"
+        column="packed_Quantity"
+       
+        /> 
+        
         <property
         name="subcatname"
         type="java.lang.String"

@@ -1028,48 +1028,58 @@ public List<ContainerDetailsFromGoodsReceive> getContainerPurchaseDetailByTwoDat
 	}
 	
 	//container stock
-		public List<ProductDetailsBean> PackedAndUnpackedStock(String productname,String fk_cat_id,String fk_subcat_id) {
+	public List<ProductDetailsBean> PackedAndUnpackedStock(String productname,String fk_cat_id,String fk_subcat_id) {
 
-			HibernateUtility hbu=null;
-			Session session=null;
-			List<ProductDetailsBean> stockList = null;
-			try
-			{
-				hbu = HibernateUtility.getInstance();
-				session = hbu.getHibernateSession();
-				Query query = session.createSQLQuery("SELECT ProductName,CompanyName,Quantity,unpacked_Quantity,UpdateDate from stock_detail  WHERE ProductName='"+productname+"' and FkCatId='"+fk_cat_id+"' and FkSubCatId='"+fk_subcat_id+"'");
-				List<Object[]> list = query.list();
-				stockList = new ArrayList<ProductDetailsBean>(0);
+		HibernateUtility hbu=null;
+		Session session=null;
+		List<ProductDetailsBean> stockList = null;
+		try
+		{
+			hbu = HibernateUtility.getInstance();
+			session = hbu.getHibernateSession();
+			Query query = session.createSQLQuery("SELECT ProductName,CompanyName,Quantity,unpacked_Quantity,packed_Quantity,UpdateDate from stock_detail  WHERE ProductName='"+productname+"' and FkCatId='"+fk_cat_id+"' and FkSubCatId='"+fk_subcat_id+"'");
+			List<Object[]> list = query.list();
+			stockList = new ArrayList<ProductDetailsBean>(0);
+			
+			
+			for (Object[] object : list) {
 				
+				ProductDetailsBean reports = new ProductDetailsBean();
 				
-				for (Object[] object : list) {
-					
-					ProductDetailsBean reports = new ProductDetailsBean();
-					
-					reports.setProductName(object[0].toString());
-					reports.setManufacturingCompany((object[1].toString()));
-					reports.setQuantity(Double.parseDouble(object[2].toString()));
+				reports.setProductName(object[0].toString());
+				reports.setManufacturingCompany((object[1].toString()));
+				reports.setQuantity(Double.parseDouble(object[2].toString()));
+				reports.setUnpackedQuantity(Double.parseDouble(object[3].toString()));
+				/*reports.setUnpackedQuantity(Double.parseDouble((object[3].toString())));
+				Double unpcked=Double.parseDouble((object[3].toString()));
+				Double total=Double.parseDouble((object[2].toString()));
+				
+				if(unpcked>total)
+				{
+					 reports.setUnpackedQuantity(total);
+					 unpcked=total;
+					 
+				}
+				else
+				{
 					reports.setUnpackedQuantity(Double.parseDouble((object[3].toString())));
-					
-					Double unpcked=Double.parseDouble((object[3].toString()));
-					Double total=Double.parseDouble((object[2].toString()));
-					Double packed=total-unpcked;
-					
-					reports.setPackedQuantity(packed);
-					reports.setUpdateDate(object[4].toString());
-					stockList.add(reports); 
-			
-				}}
-			catch(Exception e)
-			{
-				e.printStackTrace();	
-			}
-			return stockList;	
-			
-		
-		
-		
+				}*/
+				reports.setPackedQuantity(Double.parseDouble(object[4].toString()));
+				reports.setUpdateDate(object[5].toString());
+				stockList.add(reports); 
+				session.saveOrUpdate(stockList);
+			}}
+		catch(Exception e)
+		{
+			e.printStackTrace();	
 		}
+		return stockList;	
+		
+	
+	
+	
+	}
+
 
 
 	
@@ -1468,7 +1478,7 @@ public List<ContainerDetailsFromGoodsReceive> getContainerPurchaseDetailByTwoDat
 		}
 	
 		
-		public List<StockDetail> getStockDetailsForReportAsPerCategory(String cat) {
+public List<StockDetail> getStockDetailsForReportAsPerCategory(String cat) {
 
 
 			
@@ -1480,7 +1490,8 @@ public List<ContainerDetailsFromGoodsReceive> getContainerPurchaseDetailByTwoDat
 				hbu = HibernateUtility.getInstance();
 				session = hbu.getHibernateSession();
 				int catageory = Integer.parseInt(cat);
-				Query query = session.createSQLQuery("select ProductName, CompanyName, weight, quantity from stock_detail where quantity>=0 AND FkCatId ="+catageory);
+				Query query = session.createSQLQuery("SELECT ProductName,CompanyName,Quantity,unpacked_Quantity,packed_Quantity from stock_detail  where quantity>=0 AND FkCatId ="+catageory);
+				//Query query = session.createSQLQuery("select ProductName, CompanyName, packed_Quantity , quantity from stock_detail where quantity>=0 AND FkCatId ="+catageory);
 				List<Object[]> list = query.list();
 				stockList = new ArrayList<StockDetail>(0);
 				
@@ -1491,10 +1502,25 @@ public List<ContainerDetailsFromGoodsReceive> getContainerPurchaseDetailByTwoDat
 					
 					reports.setProductName(object[0].toString());
 					reports.setCompanyName(object[1].toString());
-					reports.setWeight((Double)object[2]);
-					reports.setQuantity((Double)object[3]);
+					reports.setQuantity(Double.parseDouble(object[2].toString()));
+					reports.setUnpackedQuantity(Double.parseDouble(object[3].toString()));
+					reports.setPackedQuantity(Double.parseDouble(object[4].toString()));
+					/*Double quanty=Double.parseDouble(object[2].toString());
+					Double unpacked=Double.parseDouble(object[3].toString());
 					
+					reports.setQuantity(quanty);
+					Double packed=quanty-unpacked;
+					if(packed<0)
+					{
+						reports.setPackedQuantity((double) 0);
+					}
+					else
+					{
+					reports.setPackedQuantity(packed);
+					}
+					reports.setPackedQuantity(packed);*/
 					stockList.add(reports); 
+					session.saveOrUpdate(stockList);
 			
 				}}
 			catch(Exception e)
@@ -1504,8 +1530,7 @@ public List<ContainerDetailsFromGoodsReceive> getContainerPurchaseDetailByTwoDat
 			System.out.println("@@@@@@@@@@@ DAO Stock Report List :: "+stockList);
 			return stockList;	
 		
-		}
-		
+		}		
 		
 		public List<StockDetail> getStockDetailsAsPerProductName(String proName) {
 
@@ -1516,21 +1541,43 @@ public List<ContainerDetailsFromGoodsReceive> getContainerPurchaseDetailByTwoDat
 			{
 				hbu = HibernateUtility.getInstance();
 				session = hbu.getHibernateSession();
-				Query query = session.createSQLQuery("select ProductName, CompanyName, weight, quantity from stock_detail where quantity>=0 AND ProductName ='" + proName +"'");
+				Query query = session.createSQLQuery("SELECT ProductName,CompanyName,Quantity,unpacked_Quantity,packed_Quantity from stock_detail where quantity>=0 AND ProductName ='" + proName +"'");
+				//Query query = session.createSQLQuery("select ProductName, CompanyName, packed_Quantity , quantity from stock_detail where quantity>=0 AND ProductName ='" + proName +"'");
 				List<Object[]> list = query.list();
 				stockList = new ArrayList<StockDetail>(0);
 				
 				
 				for (Object[] object : list) {
 					
+					/*StockDetail reports = new StockDetail();
+					
+					reports.setProductName(object[0].toString());
+					reports.setCompanyName(object[1].toString());
+					reports.setPackedQuantity((Double)object[2]);
+					reports.setQuantity((Double)object[3]);
+					
+					stockList.add(reports);*/ 
 					StockDetail reports = new StockDetail();
 					
 					reports.setProductName(object[0].toString());
 					reports.setCompanyName(object[1].toString());
-					reports.setWeight((Double)object[2]);
-					reports.setQuantity((Double)object[3]);
-					
+					reports.setQuantity(Double.parseDouble(object[2].toString()));
+					reports.setUnpackedQuantity(Double.parseDouble(object[3].toString()));
+					reports.setPackedQuantity(Double.parseDouble(object[4].toString()));
+					/*Double unpacked=Double.parseDouble(object[3].toString());
+					reports.setQuantity(quanty);
+					Double packed=quanty-unpacked;
+					if(packed<0)
+					{
+						reports.setPackedQuantity((double) 0);
+					}
+					else
+					{
+					reports.setPackedQuantity(packed);
+					}*/
 					stockList.add(reports); 
+					session.saveOrUpdate(stockList);
+
 			
 				}}
 			catch(Exception e)
@@ -1550,21 +1597,49 @@ public List<ContainerDetailsFromGoodsReceive> getContainerPurchaseDetailByTwoDat
 			{
 				hbu = HibernateUtility.getInstance();
 				session = hbu.getHibernateSession();
-				Query query = session.createSQLQuery("select ProductName, CompanyName, weight, quantity from stock_detail where quantity>=0 AND CompanyName ='" + companyName +"'");
+				Query query = session.createSQLQuery("SELECT ProductName,CompanyName,Quantity,unpacked_Quantity,packed_Quantity from stock_detail  where quantity>=0 AND CompanyName ='" + companyName +"'"); 
+				//Query query = session.createSQLQuery("select ProductName, CompanyName, packed_Quantity, quantity from stock_detail where quantity>=0 AND CompanyName ='" + companyName +"'");
 				List<Object[]> list = query.list();
 				stockList = new ArrayList<StockDetail>(0);
 				
 				
 				for (Object[] object : list) {
 					
+					/*StockDetail reports = new StockDetail();
+					
+					reports.setProductName(object[0].toString());
+					reports.setCompanyName(object[1].toString());
+					reports.setPackedQuantity((Double)object[2]);
+					reports.setQuantity((Double)object[3]);
+					
+					stockList.add(reports); 
 					StockDetail reports = new StockDetail();
 					
 					reports.setProductName(object[0].toString());
 					reports.setCompanyName(object[1].toString());
-					reports.setWeight((Double)object[2]);
-					reports.setQuantity((Double)object[3]);
+					Double quanty=Double.parseDouble(object[2].toString());
+					Double unpacked=Double.parseDouble(object[3].toString());
+					reports.setQuantity(quanty);
+					Double packed=quanty-unpacked;
+					if(packed<0)
+					{
+						reports.setPackedQuantity((double) 0);
+					}
+					else
+					{
+					reports.setPackedQuantity(packed);
+					}
+					reports.setPackedQuantity(packed);*/
+					StockDetail reports = new StockDetail();
 					
+					reports.setProductName(object[0].toString());
+					reports.setCompanyName(object[1].toString());
+					reports.setQuantity(Double.parseDouble(object[2].toString()));
+					reports.setUnpackedQuantity(Double.parseDouble(object[3].toString()));
+					reports.setPackedQuantity(Double.parseDouble(object[4].toString()));
 					stockList.add(reports); 
+					session.saveOrUpdate(stockList);
+
 			
 				}}
 			catch(Exception e)
@@ -1574,8 +1649,6 @@ public List<ContainerDetailsFromGoodsReceive> getContainerPurchaseDetailByTwoDat
 			return stockList;	
 		
 		}
-		
-
 
 public List<PurchaseDetailsFromGoodsReceive> getPurchaseDetailsForSingleDateFromGoodsReceive(
 			String fDate) {
@@ -2417,6 +2490,7 @@ public List<PurchaseDetailsFromGoodsReceive> geTaxDetailsAsPerCategoryForSingleD
 }
 
 
+
 public List<StockDetail> getStockDetailsAsPerProductName(String proName, String company) {
 
 	HibernateUtility hbu=null;
@@ -2426,7 +2500,8 @@ public List<StockDetail> getStockDetailsAsPerProductName(String proName, String 
 	{
 		hbu = HibernateUtility.getInstance();
 		session = hbu.getHibernateSession();
-		Query query = session.createSQLQuery("select ProductName, CompanyName, weight, quantity from stock_detail where ProductName =:proName AND CompanyName =:company ");
+		Query query = session.createSQLQuery("select ProductName, CompanyName,quantity,unpacked_Quantity,packed_Quantity from stock_detail where ProductName =:proName AND CompanyName =:company ");
+		//Query query = session.createSQLQuery("select ProductName, CompanyName,packed_Quantity, quantity from stock_detail where ProductName =:proName AND CompanyName =:company ");
 		 query.setParameter("proName", proName);
 		 query.setParameter("company", company);
 		/* query.setParameter("weight", weight);*/
@@ -2435,14 +2510,43 @@ public List<StockDetail> getStockDetailsAsPerProductName(String proName, String 
 		stockList = new ArrayList<StockDetail>(0);
 		for (Object[] object : list) {
 			
+			/*StockDetail reports = new StockDetail();
+			
+			reports.setProductName(object[0].toString());
+			reports.setCompanyName(object[1].toString());
+			reports.setPackedQuantity((Double)object[2]);
+			reports.setQuantity((Double)object[3]);
+			
+			stockList.add(reports);
 			StockDetail reports = new StockDetail();
 			
 			reports.setProductName(object[0].toString());
 			reports.setCompanyName(object[1].toString());
-			reports.setWeight((Double)object[2]);
-			reports.setQuantity((Double)object[3]);
-			
+			Double quanty=Double.parseDouble(object[2].toString());
+			Double unpacked=Double.parseDouble(object[3].toString());
+			reports.setQuantity(quanty);
+			Double packed=quanty-unpacked;
+			if(packed<0)
+			{
+				reports.setPackedQuantity((double) 0);
+			}
+			else
+			{
+			reports.setPackedQuantity(packed);
+			}
+			//reports.setPackedQuantity(packed);
 			stockList.add(reports); 
+			session.saveOrUpdate(stockList);*/
+			StockDetail reports = new StockDetail();
+			
+			reports.setProductName(object[0].toString());
+			reports.setCompanyName(object[1].toString());
+			reports.setQuantity(Double.parseDouble(object[2].toString()));
+			reports.setUnpackedQuantity(Double.parseDouble(object[3].toString()));
+			reports.setPackedQuantity(Double.parseDouble(object[4].toString()));
+			stockList.add(reports); 
+			session.saveOrUpdate(stockList);
+
 	
 		}}
 	catch(Exception e)

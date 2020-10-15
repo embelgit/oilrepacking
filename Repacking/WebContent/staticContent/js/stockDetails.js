@@ -65,7 +65,7 @@ function StockDetailsReportAsPerCompanyName(){
 		columns: [
 					{"data": "productName", "width": "5%"},
 					{"data": "companyName", "width": "5%"},
-					{"data": "weight", "width": "5%"},
+					{"data": "packedQuantity", "width": "5%"},
 					{"data": "quantity" , "width": "5%"},
 		        
 		        ],
@@ -158,7 +158,7 @@ function StockDetailsReportAsPerCat(){
 		columns: [
 		            {"data": "productName", "width": "5%"},
 		            {"data": "companyName", "width": "5%"},
-		            {"data": "weight", "width": "5%"},
+		            {"data": "packedQuantity", "width": "5%"},
 		            {"data": "quantity" , "width": "5%"},
 		        
 		        ],
@@ -463,7 +463,7 @@ function StockDetailsReportAsPerProductName(){
 		columns: [
 					{"data": "productName", "width": "5%"},
 					{"data": "companyName", "width": "5%"},
-					{"data": "weight", "width": "5%"},
+					{"data": "packedQuantity", "width": "5%"},
 					{"data": "quantity" , "width": "5%"},
 		        
 		        ],

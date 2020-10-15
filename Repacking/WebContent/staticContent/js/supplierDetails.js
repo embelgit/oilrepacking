@@ -1,5 +1,110 @@
 function supplierDetail(){
 	 //supDetails();
+	if(document.spld.IdNo.value != "")
+	{
+		var letterNumber = /^[0-9]+$/;
+		if(document.spld.IdNo.value.match(letterNumber))
+			{
+				if(document.spld.dealerName.value != "")
+				{	
+					var letterNumber = /^[a-zA-Z ]+$/;
+					if(document.spld.dealerName.value.match(letterNumber))
+					{
+						if(document.spld.personName.value != "")
+							{
+								if(document.spld.contactNo.value != "")
+								{
+									var letterNumber = /^[0-9]{10}$/;
+									 if(document.spld.contactNo.value.match(letterNumber))
+	      								{
+										
+											if(document.spld.city.value!="")
+											{
+												    var letterNumber = /^[a-zA-Z ]+$/;
+	      											if(document.spld.city.value.match(letterNumber))
+	      											{
+														if ( document.spld.tinNo.value != "" )
+	      													{
+	      														supDetails();
+	      													}
+	      												else
+	      													{
+	      													alert("Enter GST Number");
+	      													return false;
+	      													}
+													}
+													 else
+	      											{
+	      												alert("Enter City Name Contains Only Characters");
+	      												return false;
+	      											}
+
+											}
+											else
+	      										{
+	      											alert("Enter City Name");
+	      											return false;
+	      										}
+
+
+
+										}
+										 else
+	      									{
+	      										alert("Please Enter 10 Digit Mobile Number");
+	 												return false;
+	      									}
+								}
+									else
+									{
+										alert("Please Enter Contact Number");
+											return false;
+									}
+							}
+						else
+							{
+								alert("Enter Person Name");
+								return false;
+							}
+
+					}
+					else
+	      			 {
+	      				 alert("Enter Supplier Name Contains only Characters");
+	      				 return false;
+	      			 }
+
+				}
+				
+				else
+				{
+				alert("Enter Supplier Name");
+				return false;
+				}	
+
+			}
+	     else{
+			
+			alert("Enter SupplierId In number only!");
+
+			}
+
+	}
+	else
+	{
+		alert("Enter SupplierId ...!!");
+		return false;
+	}
+	
+
+}
+
+
+
+
+
+/*function supplierDetail(){
+	 //supDetails();
 if(document.spld.IdNo.value != "")
 {
 	
@@ -117,11 +222,12 @@ if(document.spld.IdNo.value != "")
 		alert("Enter SupplierId ...!!");
 		return false;
 	}
-
-	
-	
-
 }
+*/
+	
+	
+
+
 
 	
 	

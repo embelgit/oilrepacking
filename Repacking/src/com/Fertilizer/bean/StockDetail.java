@@ -12,6 +12,8 @@ public class StockDetail {
 	private String companyName;
 	private Double weight;
 	private Double quantity;
+	private Double packedQuantity;
+	private Double unpackedQuantity;
 	
 	public String getCompanyName() {
 		return companyName;
@@ -63,8 +65,24 @@ public class StockDetail {
 		this.batchNo = batchNo;
 	}
 	
+	public double getPackedQuantity() {
+		return packedQuantity;
+	}
+
+	public void setPackedQuantity(Double packedQuantity) {
+		this.packedQuantity = packedQuantity;
+	}
 	
-	
-	
+
+	public double getUnpackedQuantity() {
+		return unpackedQuantity;
+	}
+
+
+
+
+	public void setUnpackedQuantity(double unpackedQuantity) {
+		this.unpackedQuantity = unpackedQuantity;
+	}
 	
 }

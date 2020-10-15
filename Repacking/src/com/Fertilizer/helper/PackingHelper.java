@@ -188,33 +188,37 @@ public class PackingHelper {
 	
 	try
 	{
-	 Long PkStockId;
-	 Double quantity1;
-	 hbu1 = HibernateUtility.getInstance();
-	 session1 = hbu1.getHibernateSession();
-	 transaction1 = session1.beginTransaction();
-	
-	 Query query1 = session1.createSQLQuery("select PkStockId , unpacked_Quantity from stock_detail where ProductName='"+proName+"' AND  FkSubCatId='"+fkSubCatId+"' AND  FkCatId='"+fkCatId+"'");
-	
-	 List<Object[]> list1 = query1.list();
-	 
-	  for (Object[] object : list1) {
-	  System.out.println(Arrays.toString(object));  
-	  PkStockId = Long.parseLong(object[0].toString());
-	  quantity1 = Double.parseDouble(object[1].toString());
-	  System.out.println("PkStockId " +PkStockId);
-	  System.out.println("quantity " +quantity1);
-	  
-	  Double updatequnty = (double) (quantity1 - Double.parseDouble(packingQuantity));
-	  System.out.println("updatequnty " +updatequnty);
-	
-    Stock Stock = (Stock) session1.load(Stock.class, new Long(PkStockId));
-    
-    Stock.setUnpackedQuantity(updatequnty);
-	 
-	 session1.saveOrUpdate(Stock);
-    transaction1.commit();
-   System.out.println("Success ");	 
+		 Long PkStockId;
+		 Double quantity1;
+		 Double Quantity;
+		 hbu1 = HibernateUtility.getInstance();
+		 session1 = hbu1.getHibernateSession();
+		 transaction1 = session1.beginTransaction();
+		 //Query query1 = session1.createSQLQuery("select PkStockId , unpacked_Quantity from stock_detail where ProductName='"+proName+"' AND  FkSubCatId='"+fkSubCatId+"' AND  FkCatId='"+fkCatId+"'");
+		 Query query1 = session1.createSQLQuery("select PkStockId , unpacked_Quantity,packed_Quantity from stock_detail where ProductName='"+proName+"' AND  FkSubCatId='"+fkSubCatId+"' AND  FkCatId='"+fkCatId+"'");
+		
+		 List<Object[]> list1 = query1.list();
+		 
+		  for (Object[] object : list1) {
+		  System.out.println(Arrays.toString(object));  
+		  PkStockId = Long.parseLong(object[0].toString());
+		  quantity1 = Double.parseDouble(object[1].toString());
+		  Quantity= Double.parseDouble(object[2].toString());
+		  System.out.println("PkStockId " +PkStockId);
+		  System.out.println("quantity " +quantity1);
+		  
+		  Double updatequnty = (double) (quantity1 - Double.parseDouble(packingQuantity));
+		  Double packedQuantity=Quantity+Double.parseDouble(packingQuantity);
+		  //Double packedQuantity=Quantity-updatequnty;
+		  System.out.println("updatequnty " +updatequnty);
+		
+	    Stock Stock = (Stock) session1.load(Stock.class, new Long(PkStockId));
+	    Stock.setPackedQuantity(packedQuantity);
+	    Stock.setUnpackedQuantity(updatequnty);
+		 
+		 session1.saveOrUpdate(Stock);
+	    transaction1.commit();
+	   System.out.println("Success ");	 
    }
 	  
 	}
