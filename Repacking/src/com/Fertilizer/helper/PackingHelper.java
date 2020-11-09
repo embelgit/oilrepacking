@@ -2,7 +2,6 @@ package com.Fertilizer.helper;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -20,9 +19,7 @@ import org.jfree.util.Log;
 import com.Fertilizer.hibernate.CotainerGoodsReceiveBean;
 import com.Fertilizer.bean.GetpackingDetails;
 import com.Fertilizer.dao.PackingDao;
-import com.Fertilizer.dao.Packing_InfoDao;
 import com.Fertilizer.hibernate.PackingBean;
-import com.Fertilizer.hibernate.Packing_InfoBean;
 import com.Fertilizer.hibernate.Stock;
 import com.Fertilizer.hibernate.containerStock;
 import com.Fertilizer.utility.HibernateUtility;
@@ -188,37 +185,37 @@ public class PackingHelper {
 	
 	try
 	{
-		 Long PkStockId;
-		 Double quantity1;
-		 Double Quantity;
-		 hbu1 = HibernateUtility.getInstance();
-		 session1 = hbu1.getHibernateSession();
-		 transaction1 = session1.beginTransaction();
-		 //Query query1 = session1.createSQLQuery("select PkStockId , unpacked_Quantity from stock_detail where ProductName='"+proName+"' AND  FkSubCatId='"+fkSubCatId+"' AND  FkCatId='"+fkCatId+"'");
-		 Query query1 = session1.createSQLQuery("select PkStockId , unpacked_Quantity,packed_Quantity from stock_detail where ProductName='"+proName+"' AND  FkSubCatId='"+fkSubCatId+"' AND  FkCatId='"+fkCatId+"'");
-		
-		 List<Object[]> list1 = query1.list();
-		 
-		  for (Object[] object : list1) {
-		  System.out.println(Arrays.toString(object));  
-		  PkStockId = Long.parseLong(object[0].toString());
-		  quantity1 = Double.parseDouble(object[1].toString());
-		  Quantity= Double.parseDouble(object[2].toString());
-		  System.out.println("PkStockId " +PkStockId);
-		  System.out.println("quantity " +quantity1);
-		  
-		  Double updatequnty = (double) (quantity1 - Double.parseDouble(packingQuantity));
-		  Double packedQuantity=Quantity+Double.parseDouble(packingQuantity);
-		  //Double packedQuantity=Quantity-updatequnty;
-		  System.out.println("updatequnty " +updatequnty);
-		
-	    Stock Stock = (Stock) session1.load(Stock.class, new Long(PkStockId));
-	    Stock.setPackedQuantity(packedQuantity);
-	    Stock.setUnpackedQuantity(updatequnty);
-		 
-		 session1.saveOrUpdate(Stock);
-	    transaction1.commit();
-	   System.out.println("Success ");	 
+	 Long PkStockId;
+	 Double quantity1;
+	 Double Quantity;
+	 hbu1 = HibernateUtility.getInstance();
+	 session1 = hbu1.getHibernateSession();
+	 transaction1 = session1.beginTransaction();
+	 //Query query1 = session1.createSQLQuery("select PkStockId , unpacked_Quantity from stock_detail where ProductName='"+proName+"' AND  FkSubCatId='"+fkSubCatId+"' AND  FkCatId='"+fkCatId+"'");
+	 Query query1 = session1.createSQLQuery("select PkStockId , unpacked_Quantity,packed_Quantity from stock_detail where ProductName='"+proName+"' AND  FkSubCatId='"+fkSubCatId+"' AND  FkCatId='"+fkCatId+"'");
+	
+	 List<Object[]> list1 = query1.list();
+	 
+	  for (Object[] object : list1) {
+	  System.out.println(Arrays.toString(object));  
+	  PkStockId = Long.parseLong(object[0].toString());
+	  quantity1 = Double.parseDouble(object[1].toString());
+	  Quantity= Double.parseDouble(object[2].toString());
+	  System.out.println("PkStockId " +PkStockId);
+	  System.out.println("quantity " +quantity1);
+	  
+	  Double updatequnty = (double) (quantity1 - Double.parseDouble(packingQuantity));
+	  Double packedQuantity=Quantity+Double.parseDouble(packingQuantity);
+	  //Double packedQuantity=Quantity-updatequnty;
+	  System.out.println("updatequnty " +updatequnty);
+	
+    Stock Stock = (Stock) session1.load(Stock.class, new Long(PkStockId));
+    Stock.setPackedQuantity(packedQuantity);
+    Stock.setUnpackedQuantity(updatequnty);
+	 
+	 session1.saveOrUpdate(Stock);
+    transaction1.commit();
+   System.out.println("Success ");	 
    }
 	  
 	}
@@ -254,7 +251,8 @@ public class PackingHelper {
 			
 			
 			bean.setProduct(o[0].toString());;
-			bean.setQuantityDouble(Double.parseDouble(o[1].toString()));
+			
+			bean.setQuantityDouble(Double.parseDouble(o[1].toString()));//unpacked quantity
 			
 				bean.setCatid(Long.parseLong(o[2].toString()));
 				bean.setSubCatid(Long.parseLong(o[3].toString()));
@@ -281,25 +279,19 @@ public class PackingHelper {
 		Map map = new HashMap();
 
 //		GoodsReceiveHibernate bean = new GoodsReceiveHibernate();
-		containerStock bean = new containerStock();
+		CotainerGoodsReceiveBean bean = new CotainerGoodsReceiveBean();
 		for (int i = 0; i < list.size(); i++) 
 		{
 			Object[] o = (Object[]) list.get(i);
 			System.out.println(" Result - "+Arrays.toString(o));
 			
-			bean.setPkContainerStockId(Long.parseLong(o[0].toString()));
+			bean.setPkContainerGoodsReceiveId(Long.parseLong(o[0].toString()));
 			bean.setUnit(o[1].toString());
-			bean.setQuantity(Double.parseDouble(o[2].toString()));
-			System.out.println("~~~~~~~~~ ~~~~~~ ~~~~~ pk  ID -- "+bean.getPkContainerStockId()+" & unit  is - - "+bean.getUnit()+" & quantity  is - - "+bean.getQuantity());
+			System.out.println("~~~~~~~~~ ~~~~~~ ~~~~~ pk  ID -- "+bean.getPkContainerGoodsReceiveId()+" & unit  is - - "+bean.getUnit());
 		}
-		map.put(bean.getPkContainerStockId(), bean);
+		map.put(bean.getPkContainerGoodsReceiveId(), bean);
 		return map;
 	}
-
-
-
-
-
 
 public Map getquantity(String id) {
 	
